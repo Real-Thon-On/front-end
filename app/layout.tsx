@@ -45,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
       capable: true,
       statusBarStyle: 'default',
       title: 'Save Your Minds - ON',
-      startupImage,
+      startupImage: startupImage,
     },
     themeColor: '#FFFFFF',
   };
