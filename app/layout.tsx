@@ -1,14 +1,14 @@
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import './globals.css';
+import { _startupImage } from '@/lib/pwa_startup';
 import { pretendard } from '@/public/font';
-import { _startupImage } from '@/public/pwa';
 
 const defaultUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? process.env.NEXT_PUBLIC_SITE_URL
   : 'http://localhost:3000';
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   manifest: '/manifest.webmanifest',
   applicationName: 'ON',
@@ -21,7 +21,7 @@ export const metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    startupImage: _startupImage,
+    startupImage: [..._startupImage, { url: '/pwa/splash-image/apple-splash-750-1334.jpg' }],
   },
 };
 
