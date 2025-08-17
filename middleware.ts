@@ -5,7 +5,7 @@ export const config = {
   matcher: ['/((?!_next|api|.*\\..*).*)'],
 };
 
-const AUTH_PAGES = ['/signin', '/signup'];
+const AUTH_PAGES = ['/signin', '/signup', '/pwa-debug'];
 const AUTHED_REDIRECT = '/';
 
 function isAuthPage(pathname: string) {
