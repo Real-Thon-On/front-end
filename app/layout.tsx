@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import type { Metadata, Viewport } from 'next';
 
-import './globals.css';
 import { _startupImage } from '@/lib/pwa_startup';
 import { pretendard } from '@/public/font';
+
+import './globals.css';
 
 const defaultUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? process.env.NEXT_PUBLIC_SITE_URL
@@ -25,7 +27,12 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: '#FFF8E7', maximumScale: 1, userScalable: false };
+export const viewport: Viewport = {
+  themeColor: '#f1f0ea',
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+};
 
 export default function RootLayout({
   children,
@@ -34,7 +41,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pretendard.variable} antialiased`}>{children}</body>
+      <body
+        className={clsx(
+          pretendard.variable,
+          'relative antialiased min-h-dvh h-full bg-main',
+          'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
+          'overscroll-y-contain'
+        )}
+      >
+        <div className="relative mx-auto w-full max-w-[500px] min-h-dvh">{children}</div>
+      </body>
     </html>
   );
 }

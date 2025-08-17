@@ -20,6 +20,9 @@ const withPWA = createWithPWA({
 });
 
 const nextConfig: NextConfig = {
+  experimental: {
+    globalNotFound: true,
+  },
   reactStrictMode: false,
   webpack: config => {
     // @ts-expect-error 타입 에러 무시

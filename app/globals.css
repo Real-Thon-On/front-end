@@ -83,34 +83,25 @@ audio,
 video {
   vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
 * {
   box-sizing: border-box;
 }
 :root {
   height: 100%;
   font-size: 10px;
+  color: var(--black);
 
   /* color */
-  --bg-main: #fff8e7;
+  --bg-main: #f1f0ea;
   --black: #1d1e23;
   --gray1: #dde7e7;
   --gray2: #a4aaa7;
   --gray3: #616264;
   --primary: #72c6a5;
+}
+
+.bg-main {
+  background-color: var(--bg-main);
 }
 
 @utility h1 {
@@ -126,7 +117,7 @@ section {
   @apply font-medium text-[1.8rem] leading-[2.4rem] tracking-[-0.025em];
 }
 @utility body2 {
-  @apply font-medium text-[1.6rem] leading-[2rem]   tracking-[-0.025em];
+  @apply font-medium text-[1.6rem] leading-[2rem] tracking-[-0.025em];
 }
 @utility body3 {
   @apply font-normal  text-[1.6rem] leading-[2.56rem] tracking-[-0.025em];
@@ -135,7 +126,7 @@ section {
   @apply font-semibold text-[1.8rem] leading-[2.4rem] tracking-[0em];
 }
 @utility btn2 {
-  @apply font-semibold text-[1.6rem] leading-[2rem]   tracking-[0em];
+  @apply font-semibold text-[1.6rem] leading-[2rem] tracking-[0em];
 }
 @utility caption {
   @apply font-medium text-[1.4rem] leading-[2rem] tracking-[-0.025em];
@@ -178,6 +169,6 @@ button {
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 5px;
   background-color: #ffffff;
+  cursor: pointer;
 }
