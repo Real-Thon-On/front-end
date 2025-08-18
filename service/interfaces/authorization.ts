@@ -1,49 +1,53 @@
-import { TokenTypeHint } from '@/constants/types';
+// import { TokenTypeHint } from '@/constants/types';
 
 export interface GetAccessToken {
   method: 'POST';
-  endpoint: '/auth/v1/token';
-  req: {
-    grantType: string;
-    clientId: string;
-    clientSecret: string;
-    code: string;
-    state: string;
-  };
+  endpoint: '/api/auth/oauth-login';
+  req: undefined;
   res: {
-    accessToken: string;
-    refreshToken: string;
-    tokenType: string;
-    expiresIn: string;
+    access: string;
+    refresh: string;
   };
 }
 
-export interface RefreshAccessToken {
+export interface RegisterUser {
   method: 'POST';
-  endpoint: '/auth/v1/token';
+  endpoint: '/api/auth/complete-sign-up';
   req: {
-    grantType: string;
-    refreshToken: string;
-    clientId: string;
-    clientSecret: string;
+    nickname: string;
+    email: string;
   };
   res: {
-    accessToken: string;
-    refreshToken: string;
-    tokenType: string;
-    expiresIn: string;
-    scope: string;
+    success: boolean;
   };
 }
 
-export interface RevokeToken {
-  method: 'POST';
-  endpoint: '/auth/v1/token/revoke';
-  req: {
-    clientId: string;
-    clientSecret: string;
-    token: string;
-    tokenTypeHint: TokenTypeHint;
-  };
-  res: undefined;
-}
+// export interface RefreshAccessToken {
+//   method: 'POST';
+//   endpoint: '/auth/v1/token';
+//   req: {
+//     grantType: string;
+//     refreshToken: string;
+//     clientId: string;
+//     clientSecret: string;
+//   };
+//   res: {
+//     accessToken: string;
+//     refreshToken: string;
+//     tokenType: string;
+//     expiresIn: string;
+//     scope: string;
+//   };
+// }
+
+// export interface RevokeToken {
+//   method: 'POST';
+//   endpoint: '/auth/v1/token/revoke';
+//   req: {
+//     clientId: string;
+//     clientSecret: string;
+//     token: string;
+//     tokenTypeHint: TokenTypeHint;
+//   };
+//   res: undefined;
+// }

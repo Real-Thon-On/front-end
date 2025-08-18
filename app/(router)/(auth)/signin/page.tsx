@@ -4,6 +4,7 @@ import Logo from '@/public/on_logo.svg';
 import Symbol from '@icons/symbol.svg';
 import styles from '@styles/signin.module.css';
 
+import Dev_Logo from './_components/dev_Logo';
 import SocialLoginBtn from './_components/socialLogin';
 
 export default function SignIn() {
@@ -17,7 +18,7 @@ export default function SignIn() {
           <h4 className={styles.symbol}>따뜻함을 켜다</h4>
           <Symbol />
         </section>
-        <Logo />
+        <Dev_Logo />
         <section
           style={{
             marginTop: 'clamp(6rem, calc(6rem + 0.7 * (100svh - 844px)), 8.5rem)',
@@ -27,7 +28,7 @@ export default function SignIn() {
           <div className="flex flex-col gap-[1.2rem]">
             <SocialLoginBtn social="kakao" />
             <SocialLoginBtn social="google" />
-            <SocialLoginBtn social="apple" />
+            <SocialLoginBtn social="naver" />
           </div>
           <Link
             href={'/signup/agree'}

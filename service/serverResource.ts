@@ -1,7 +1,6 @@
-import { GetAccessToken, RefreshAccessToken, RevokeToken } from './interfaces';
+import { GetAccessToken, RegisterUser } from './interfaces';
 
 export interface APIResource {
   getAccessToken: GetAccessToken;
-  refreshAccessToken: RefreshAccessToken;
-  revokeToken: RevokeToken;
+  registerUser: RegisterUser;
 }

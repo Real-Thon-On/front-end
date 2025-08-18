@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
 type Action = {
@@ -80,6 +81,8 @@ function ActionButton({ action, align }: { action: Action; align?: 'left' | 'rig
   const common = 'flex items-center justify-center transition';
   const className = clsx(common, align === 'left' ? 'justify-start' : 'justify-end');
 
+  const router = useRouter();
+
   if (action.href && !action.disabled) {
     return (
       <Link
@@ -98,7 +101,7 @@ function ActionButton({ action, align }: { action: Action; align?: 'left' | 'rig
       type="button"
       aria-label={action.ariaLabel}
       title={action.title}
-      onClick={action.onClick}
+      onClick={align === 'left' ? () => router.back() : action.onClick}
       className={className}
       disabled={action.disabled}
     >

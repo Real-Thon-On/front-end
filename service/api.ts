@@ -1,7 +1,7 @@
 import type { APIErrorResponse, APIHeader, APIResponse } from '@/constants/types';
 import { getCookie } from '@/utils/cookie';
 
-import { RefreshAccessToken } from './authorization';
+// import { RefreshAccessToken } from './authorization';
 import { APIResource } from './serverResource';
 
 export const api = async <T extends keyof APIResource>(
@@ -15,7 +15,7 @@ export const api = async <T extends keyof APIResource>(
   const token = getCookie('accessToken');
 
   const makeRequest = async (): Promise<Response> => {
-    return await fetch(`${process.env.OPENAPI}${endpoint}`, {
+    return await fetch(`${process.env.BACKEND_API}${endpoint}`, {
       method: method,
       headers: {
         ...(param?.withoutAuth &&
@@ -28,16 +28,10 @@ export const api = async <T extends keyof APIResource>(
     });
   };
 
-  let res = await makeRequest();
+  const res = await makeRequest();
 
   if (res.status === 401) {
-    try {
-      await RefreshAccessToken();
-      res = await makeRequest();
-    } catch (error) {
-      console.error('[api] Token refresh failed: ', error);
-      throw new Error('인증이 만료되었습니다. 다시 로그인 해주세요.');
-    }
+    throw new Error('401 Unauthorized');
   }
 
   if (!res.ok) {
@@ -46,5 +40,5 @@ export const api = async <T extends keyof APIResource>(
   }
 
   const result = (await res.json()) as APIResponse<APIResource[T]['res']>;
-  return result.content;
+  return result.data;
 };

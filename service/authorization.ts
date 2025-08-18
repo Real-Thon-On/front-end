@@ -1,36 +1,35 @@
 'use server';
 
-import type { AccInterlockCode, TokenTypeHint } from '@/constants/types';
+import { get } from 'http';
+import { redirect } from 'next/navigation';
+
+import type {
+  APIErrorResponse,
+  AccInterlockCode,
+  RegisterUserParams,
+  TokenTypeHint,
+} from '@/constants/types';
 import { deleteCookie, getCookie, setCookie } from '@/utils/cookie';
 
 import { api } from './api';
 
 export const GetAccessToken = async (param: AccInterlockCode) => {
   try {
-    const res = await api<'getAccessToken'>(
-      'POST',
-      '/auth/v1/token',
-      {
-        grantType: 'authorization_code',
-        clientId: process.env.CHZZK_CLIENTID!,
-        clientSecret: process.env.CHZZK_CLIENTSECRET!,
-        code: param.code,
-        state: param.state,
-      },
-      {
-        'User-Agent': 'Mozilla/5.0',
-        'Content-Type': 'application/json',
-      }
-    );
+    const res = await api<'getAccessToken'>('POST', '/api/auth/oauth-login', undefined, {
+      'User-Agent': 'Mozilla/5.0',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${param.access}`,
+      'Device-Id': param.id,
+    });
 
-    await setCookie('access_token', res.accessToken, {
+    await setCookie('access_token', res.access, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
       maxAge: 60 * 60 * 24,
     });
-    await setCookie('refresh_token', res.refreshToken, {
+    await setCookie('refresh_token', res.refresh, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
@@ -43,63 +42,101 @@ export const GetAccessToken = async (param: AccInterlockCode) => {
   }
 };
 
-export const RefreshAccessToken = async () => {
-  const refreshToken = await getCookie('refresh_token');
-  if (!refreshToken) throw new Error('No refresh token available');
+export const RegisterUser = async (param: RegisterUserParams) => {
+  try {
+    const id = await getCookie('device_id');
+    const access = await getCookie('tempToken');
 
-  const res = await api<'refreshAccessToken'>(
-    'POST',
-    '/auth/v1/token',
-    {
-      grantType: 'refresh_token',
-      refreshToken,
-      clientId: process.env.CHZZK_CLIENTID!,
-      clientSecret: process.env.CHZZK_CLIENTSECRET!,
-    },
-    {
-      'User-Agent': 'Mozilla/5.0',
-      'Content-Type': 'application/json',
+    if (!id || !access) {
+      console.error('RegisterUser Error: Missing device_id or tempToken');
+      redirect('/signin?error=missing_credentials');
     }
-  );
 
-  await setCookie('access_token', res.accessToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 60 * 60 * 24,
-  });
-  await setCookie('refresh_token', res.refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 60 * 60 * 24 * 30,
-  });
-};
+    const res = await api<'registerUser'>(
+      'POST',
+      '/api/auth/complete-sign-up',
+      {
+        nickname: param.nickname,
+        email: param.email,
+      },
+      {
+        'User-Agent': 'Mozilla/5.0',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${access}`,
+        'Device-Id': id,
+      }
+    );
 
-export const RevokeAccessToken = async (
-  tokenVal: string,
-  tokenTypeHintVal: TokenTypeHint
-): Promise<void> => {
-  await api<'revokeToken'>(
-    'POST',
-    '/auth/v1/token/revoke',
-    {
-      clientId: process.env.CHZZK_CLIENTID!,
-      clientSecret: process.env.CHZZK_CLIENTSECRET!,
-      token: tokenVal,
-      tokenTypeHint: tokenTypeHintVal,
-    },
-    {
-      'User-Agent': 'Mozilla/5.0',
-      'Content-Type': 'application/json',
+    return res.success;
+  } catch (error) {
+    const err = error as APIErrorResponse;
+    console.error('RegisterUser Error: ', err);
+    if (err.code === 'C001') {
+      redirect('/signup/complete?error=unknown_error');
+    } else {
+      console.error(`RegisterUser Error: ${err.msg} [${err.code}]`);
+      redirect(`/signup/complete?error=${err.msg}`);
     }
-  );
-
-  if (tokenTypeHintVal === 'access_token') {
-    await deleteCookie('access_token');
-  } else {
-    await deleteCookie('refresh_token');
   }
 };
+
+// export const RefreshAccessToken = async () => {
+//   const refreshToken = await getCookie('refresh_token');
+//   if (!refreshToken) throw new Error('No refresh token available');
+
+//   const res = await api<'refreshAccessToken'>(
+//     'POST',
+//     '/auth/v1/token',
+//     {
+//       grantType: 'refresh_token',
+//       refreshToken,
+//       clientId: process.env.CHZZK_CLIENTID!,
+//       clientSecret: process.env.CHZZK_CLIENTSECRET!,
+//     },
+//     {
+//       'User-Agent': 'Mozilla/5.0',
+//       'Content-Type': 'application/json',
+//     }
+//   );
+
+//   await setCookie('access_token', res.accessToken, {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === 'production',
+//     sameSite: 'lax',
+//     path: '/',
+//     maxAge: 60 * 60 * 24,
+//   });
+//   await setCookie('refresh_token', res.refreshToken, {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === 'production',
+//     sameSite: 'lax',
+//     path: '/',
+//     maxAge: 60 * 60 * 24 * 30,
+//   });
+// };
+
+// export const RevokeAccessToken = async (
+//   tokenVal: string,
+//   tokenTypeHintVal: TokenTypeHint
+// ): Promise<void> => {
+//   await api<'revokeToken'>(
+//     'POST',
+//     '/auth/v1/token/revoke',
+//     {
+//       clientId: process.env.CHZZK_CLIENTID!,
+//       clientSecret: process.env.CHZZK_CLIENTSECRET!,
+//       token: tokenVal,
+//       tokenTypeHint: tokenTypeHintVal,
+//     },
+//     {
+//       'User-Agent': 'Mozilla/5.0',
+//       'Content-Type': 'application/json',
+//     }
+//   );
+
+//   if (tokenTypeHintVal === 'access_token') {
+//     await deleteCookie('access_token');
+//   } else {
+//     await deleteCookie('refresh_token');
+//   }
+// };
