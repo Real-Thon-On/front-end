@@ -1,23 +1,36 @@
+import { ON_DOCS_PATH } from '@/constants';
+import type { Term } from '@/constants/types';
+
+import AgreementForm from './_components/TermsAgreement';
+
 export default function SignupAgree() {
+  const Terms: Term[] = [
+    {
+      label: '서비스 이용약관',
+      href: `${ON_DOCS_PATH}/#terms`,
+      required: true,
+    },
+    {
+      label: '개인정보 수집/이용 동의',
+      href: `${ON_DOCS_PATH}/#privacy-consent`,
+      required: true,
+    },
+    {
+      label: '개인정보 제3자 정보제공 동의',
+      href: `${ON_DOCS_PATH}/#privacy-consent`,
+      required: true,
+    },
+    {
+      label: '위치기반 서비스 이용약관 동의',
+      href: `${ON_DOCS_PATH}/#location-terms`,
+      required: true,
+    },
+  ];
   return (
     <>
-      <div className="flex flex-col items-center">
-        <section
-          className="mb-[4rem]"
-          style={{ marginTop: 'clamp(3rem, calc(3rem + 0.6 * (100svh - 690px)), 11rem)' }}
-        >
-          <h4 className="text-2xl font-bold">회원가입 약관 동의</h4>
-        </section>
-        <section
-          style={{
-            marginTop: 'clamp(6rem, calc(6rem + 0.7 * (100svh - 844px)), 8.5rem)',
-            marginBottom: '3rem',
-          }}
-        >
-          <p>서비스 이용을 위해 약관에 동의해주세요.</p>
-          {/* Add your terms and conditions here */}
-        </section>
-      </div>
+      <h2>약관동의</h2>
+      <div className="body2 mt-[2rem]">필수항목 및 선택항목 약관에 동의해 주세요.</div>
+      <AgreementForm terms={Terms} />
     </>
   );
 }

@@ -18,20 +18,20 @@ const socialItems: Record<string, SocialItemsProps> = {
     icon: <Kakao />,
     bgColor: '#FEE500',
     text: '카카오 로그인',
-    redirectUrl: '/#',
+    redirectUrl: `${process.env.BACKEND_URL}/oauth2/authorization/kakao`,
   },
   google: {
     icon: <Google />,
     bgColor: '#FFFFFF',
     text: '구글로 로그인',
-    redirectUrl: '/#',
+    redirectUrl: `${process.env.BACKEND_URL}/oauth2/authorization/google`,
   },
   apple: {
     icon: <Apple />,
     bgColor: '#000000',
     textColor: '#FFFFFF',
     text: '애플로 로그인',
-    redirectUrl: '/#',
+    redirectUrl: `${process.env.BACKEND_URL}/oauth2/authorization/apple`,
   },
 };
 

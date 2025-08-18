@@ -11,7 +11,7 @@ export default function SignUpLayout({ children }: { children: React.ReactNode }
         }}
         title="회원가입"
       />
-      <main>{children}</main>
+      <main className="px-[3.2rem] mt-[4rem]">{children}</main>
     </>
   );
 }
