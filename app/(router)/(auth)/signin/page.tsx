@@ -1,7 +1,7 @@
-import Symbol from '@icons/symbol.svg';
 import Link from 'next/link';
 
 import Logo from '@/public/on_logo.svg';
+import Symbol from '@icons/symbol.svg';
 import styles from '@styles/signin.module.css';
 
 import SocialLoginBtn from './_components/socialLogin';

@@ -1,10 +1,10 @@
-import Apple from '@icons/social/Apple.svg';
-import Google from '@icons/social/Google.svg';
-import Kakao from '@icons/social/KakaoTalk.svg';
 import Link from 'next/link';
 import { JSX } from 'react';
 
 import ButtonBox from '@/components/button/buttonBox';
+import Apple from '@icons/social/Apple.svg';
+import Google from '@icons/social/Google.svg';
+import Kakao from '@icons/social/KakaoTalk.svg';
 
 interface SocialItemsProps {
   icon: JSX.Element;
