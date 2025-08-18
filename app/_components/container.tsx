@@ -32,23 +32,20 @@ export const Container = ({
 }) => {
   return (
     <Wrapper title={title}>
-      <Default className="justify-between px-[1.2rem] py-[2rem]">
-        <div className="flex">
-          <div className="rounded-[1.2rem] w-[6rem] aspect-square">
-            <SVG />
+      <Link href={href}>
+        <Default className="justify-between items-center px-[1.2rem] py-[2rem]">
+          <div className="flex">
+            <div className="rounded-[1.2rem] w-[6rem] aspect-square">
+              <SVG />
+            </div>
+            <div className="flex flex-col justify-between ml-[1.6rem]">
+              <div className="body1">{description}</div>
+              <h3>{content}</h3>
+            </div>
           </div>
-          <div className="flex flex-col justify-between ml-[1.6rem]">
-            <div className="body1">{description}</div>
-            <h3>{content}</h3>
-          </div>
-        </div>
-        <Link
-          href={href}
-          className="flex items-center"
-        >
           <Right />
-        </Link>
-      </Default>
+        </Default>
+      </Link>
     </Wrapper>
   );
 };

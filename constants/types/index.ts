@@ -6,19 +6,24 @@ export interface Term {
 export type TermsState = Record<string, boolean>;
 
 export interface APIResponse<T> {
-  code: number;
-  message: string | null;
-  content: T;
+  success: boolean;
+  data: T;
 }
 
 export interface APIErrorResponse {
-  code: number;
-  message: string | null;
+  success: boolean;
+  code: string;
+  msg: string | null;
 }
 
 export interface AccInterlockCode {
-  code: string;
-  state: string;
+  id: string;
+  access: string;
+}
+
+export interface RegisterUserParams {
+  nickname: string;
+  email: string;
 }
 
 export interface AuthAPIHeader {

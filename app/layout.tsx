@@ -56,7 +56,8 @@ export default function RootLayout({
             'relative mx-auto w-full max-w-[500px]',
             'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
             'min-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom))]',
-            'h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom))]'
+            'h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom))]',
+            'overflow-y-scroll scrollbar-hidden'
           )}
         >
           {children}

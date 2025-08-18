@@ -65,7 +65,7 @@ export default function Home() {
             </Link>
           }
         >
-          <div className="grid grid-cols-3 grid-rows-2 gap-x-[.8rem] gap-y-[.4rem]">
+          <div className="grid grid-cols-3 grid-rows-2 gap-x-[.8rem] gap-y-[.4rem] pb-[2.4rem]">
             {marketItems.map((item, index) => (
               <MarketItem
                 key={index}

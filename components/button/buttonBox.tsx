@@ -3,6 +3,8 @@
 import clsx from 'clsx';
 
 export default function ButtonBox({
+  type = 'button',
+  formId,
   children,
   bgColor,
   className,
@@ -11,6 +13,8 @@ export default function ButtonBox({
   disabled = false,
   onClick,
 }: Readonly<{
+  type?: 'button' | 'submit' | 'reset';
+  formId?: string;
   children: React.ReactNode;
   bgColor: string;
   className?: string;
@@ -21,6 +25,8 @@ export default function ButtonBox({
 }>) {
   return (
     <button
+      type={type}
+      form={formId}
       className={clsx(
         wFull ? 'w-full' : 'w-[32.6rem]',
         'h-[6rem] rounded-[1.6rem]',
