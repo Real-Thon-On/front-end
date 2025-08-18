@@ -5,6 +5,7 @@ import ButtonBox from '@/components/button/buttonBox';
 import Apple from '@icons/social/Apple.svg';
 import Google from '@icons/social/Google.svg';
 import Kakao from '@icons/social/KakaoTalk.svg';
+import Naver from '@icons/social/Naver.svg'; // Assuming you have a Naver icon
 
 interface SocialItemsProps {
   icon: JSX.Element;
@@ -33,12 +34,18 @@ const socialItems: Record<string, SocialItemsProps> = {
     text: '애플로 로그인',
     redirectUrl: `${process.env.BACKEND_URL}/oauth2/authorization/apple`,
   },
+  naver: {
+    icon: <Naver />,
+    bgColor: '#06CC80',
+    text: '네이버 로그인',
+    redirectUrl: `${process.env.BACKEND_URL}/oauth2/authorization/naver`,
+  },
 };
 
 export default function SocialLoginBtn({
   social,
 }: Readonly<{
-  social: 'kakao' | 'google' | 'apple';
+  social: 'kakao' | 'google' | 'apple' | 'naver';
 }>) {
   const { icon, bgColor, textColor, text, redirectUrl } = socialItems[social];
 

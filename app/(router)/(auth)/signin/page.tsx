@@ -27,7 +27,7 @@ export default function SignIn() {
           <div className="flex flex-col gap-[1.2rem]">
             <SocialLoginBtn social="kakao" />
             <SocialLoginBtn social="google" />
-            <SocialLoginBtn social="apple" />
+            <SocialLoginBtn social="naver" />
           </div>
           <Link
             href={'/signup/agree'}

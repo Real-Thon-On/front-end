@@ -1,0 +1,19 @@
+.default,
+.primary,
+.inner {
+  display: flex;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.default {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.primary {
+  box-shadow: 0 30px 35px 0 rgba(114, 198, 165, 0.3);
+}
+
+.inner {
+  box-shadow: 0 4px 45px 0 rgba(114, 198, 165, 0.2) inset;
+}

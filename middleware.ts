@@ -29,7 +29,7 @@ export default function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // 그 외 모든 페이지는 보호: 둘 중 하나라도 없으면 로그인으로; 나중에 refresh 토큰 로직 추가 예정
+  // 그 외 모든 페이지는 보호: 둘 중 하나라도 없으면 로그인으로; 나중에 refresh 토큰 로직 안함
   if (!isAuthed) {
     // const loginUrl = new URL('/signin', req.url);
     // return NextResponse.redirect(loginUrl);
