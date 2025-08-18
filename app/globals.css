@@ -142,6 +142,21 @@ h3 {
   @apply h3;
 }
 
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+html,
+body {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
 body {
   position: relative;
 }
@@ -169,6 +184,5 @@ button {
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: #ffffff;
   cursor: pointer;
 }

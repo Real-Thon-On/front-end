@@ -40,16 +40,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className="scrollbar-hidden"
+    >
       <body
         className={clsx(
           pretendard.variable,
           'relative antialiased min-h-dvh h-full bg-main',
-          'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
           'overscroll-y-contain'
         )}
       >
-        <div className="relative mx-auto w-full max-w-[500px] min-h-dvh">{children}</div>
+        <div
+          className={clsx(
+            'relative mx-auto w-full max-w-[500px]',
+            'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
+            'min-h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom))]',
+            'h-[calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom))]'
+          )}
+        >
+          {children}
+        </div>
       </body>
     </html>
   );

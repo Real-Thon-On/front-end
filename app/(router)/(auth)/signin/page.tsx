@@ -8,7 +8,7 @@ import SocialLoginBtn from './_components/socialLogin';
 
 export default function SignIn() {
   return (
-    <main className="flex justify-center items-center min-h-dvh">
+    <main className="flex justify-center items-center h-full">
       <div className="flex flex-col items-center">
         <section
           className="mb-[4rem]"
@@ -30,7 +30,7 @@ export default function SignIn() {
             <SocialLoginBtn social="apple" />
           </div>
           <Link
-            href={'/signup'}
+            href={'/signup/agree'}
             className="block text-center mt-[4rem]"
           >
             <span className={styles.signupLink}>회원가입하기</span>
