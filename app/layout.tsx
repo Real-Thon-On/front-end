@@ -10,7 +10,7 @@ const defaultUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? `https://${process.env.NEXT_PUBLIC_SITE_URL}`
   : 'http://localhost:3000';
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   manifest: '/manifest.webmanifest',
   applicationName: 'ON',
@@ -22,7 +22,7 @@ export const metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'black-translucent',
+    statusBarStyle: 'black',
     startupImage: [
       {
         url: '/pwa/splash/apple-splash-2048-2732.jpg',

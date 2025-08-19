@@ -11,7 +11,7 @@ export default function DiaryLayout({ children }: { children: React.ReactNode })
         }}
         title="커뮤니티"
       />
-      <main className="px-[3.2rem] mt-[.8rem]">{children}</main>
+      <main className="px-[3.2rem] mt-[.8rem] mb-[12rem]">{children}</main>
     </>
   );
 }

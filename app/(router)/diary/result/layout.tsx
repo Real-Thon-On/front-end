@@ -12,7 +12,7 @@ export default function DiaryLayout({ children }: { children: React.ReactNode })
         title="분석결과"
         border={true}
       />
-      <main className="px-[3.2rem] mt-[2.4rem]">{children}</main>
+      <main className="px-[3.2rem] mt-[2.4rem] mb-[12rem]">{children}</main>
     </>
   );
 }
