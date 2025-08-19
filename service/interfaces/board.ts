@@ -17,6 +17,7 @@ export interface GetBoardPosts {
       }
     ];
   };
+  req: undefined;
 }
 
 export interface UploadPost {
