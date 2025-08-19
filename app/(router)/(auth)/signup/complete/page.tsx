@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { RegisterUser } from '@/service/authorization';
 import { deleteCookie, getCookie } from '@/utils/cookie';
 
-import SignupClient from './_components/signupClient';
+import SignupClient from './signupClient';
 
 export default function SignupComplete() {
   async function signup(formData: FormData) {
