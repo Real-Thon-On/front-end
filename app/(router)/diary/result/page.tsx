@@ -5,8 +5,8 @@ import ButtonBox from '@/components/button/buttonBox';
 import { Default } from '@/components/layout/container/container';
 import { RecommendedEvent } from '@/service/interfaces';
 import ExampleImage from '@icons/exampleImage.svg';
-import ThumbDown from '@icons/thumbdown_black.svg';
-import ThumbUp from '@icons/thumbup_black.svg';
+
+import ThumbComponent from '../_components/thumbComponent';
 
 const exampleEvents: RecommendedEvent[] = [
   {
@@ -79,11 +79,8 @@ export default function DiaryResult() {
           거예요. 내일은 오늘보다 조금 더 자신을 이해하고 사랑하는 하루가 되길 바랄게요.
         </div>
         <div className="mt-[2rem] caption text-center">
-          <span>이 답장이 마음에 드셨나요?</span>
-          <div className="flex justify-center gap-[2rem] mt-[1.2rem]">
-            <ThumbUp />
-            <ThumbDown />
-          </div>
+          <span className="text-[var(--gray2)]">이 답장이 마음에 드셨나요?</span>
+          <ThumbComponent />
         </div>
       </Default>
       <div className="h-[8rem]"></div>
@@ -93,13 +90,18 @@ export default function DiaryResult() {
         className="w-full max-w-[43.6rem] mx-[7.5rem]"
       ></Link>
       <div className="fixed flex justify-center inset-x-0 bottom-[3.2rem]">
-        <ButtonBox
-          bgColor="var(--primary)"
-          className="max-w-[43.6rem]"
-          wFull
+        <Link
+          href={'/'}
+          className="flex w-full justify-end max-w-[50rem] px-[3.2rem]"
         >
-          메인으로
-        </ButtonBox>
+          <ButtonBox
+            bgColor="var(--primary)"
+            className="max-w-[43.6rem]"
+            wFull
+          >
+            메인으로
+          </ButtonBox>
+        </Link>
       </div>
     </>
   );

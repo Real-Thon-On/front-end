@@ -16,7 +16,7 @@ export default function Select() {
           className="relative border border-[var(--primary)] aspect-[326/160] bg-[var(--gray1)] rounded-[1.2rem] p-[.8rem] flex items-center justify-center gap-[2.4rem]"
         >
           <h3 className="flex">성인</h3>
-          <div className="absolute right-[.8rem] bottom-[6.8rem]">
+          <div className="absolute right-[.8rem] bottom-[50%] translate-y-[50%]">
             <Right />
           </div>
         </Link>
@@ -25,7 +25,7 @@ export default function Select() {
           className="relative border border-[var(--primary)] aspect-[326/160] bg-[var(--gray1)] rounded-[1.2rem] p-[.8rem] flex items-center justify-center gap-[2.4rem]"
         >
           <h3 className="flex">학생 (보호자)</h3>
-          <div className="absolute right-[.8rem] bottom-[6.8rem]">
+          <div className="absolute right-[.8rem] bottom-[50%] translate-y-[50%]">
             <Right />
           </div>
         </Link>
