@@ -1,0 +1,17 @@
+import Header from '@/components/layout/header/header';
+import Left from '@icons/arrow/arrow1_left.svg';
+
+export default function DiaryLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <Header
+        left={{
+          icon: <Left />,
+          ariaLabel: '뒤로 가기',
+        }}
+        title="장바구니"
+      />
+      <main className="mt-[2rem]">{children}</main>
+    </>
+  );
+}
