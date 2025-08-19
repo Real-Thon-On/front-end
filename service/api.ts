@@ -8,17 +8,17 @@ export const api = async <T extends keyof APIResource>(
   method: APIResource[T]['method'],
   endpoint: APIResource[T]['endpoint'],
   param?: APIResource[T]['req'] & {
-    withoutAuth?: boolean;
+    needAuth?: boolean;
   },
   headers?: APIHeader
 ): Promise<APIResource[T]['res']> => {
-  const token = getCookie('accessToken');
+  const token = await getCookie('accessToken');
 
   const makeRequest = async (): Promise<Response> => {
     return await fetch(`${process.env.BACKEND_API}${endpoint}`, {
       method: method,
       headers: {
-        ...(param?.withoutAuth &&
+        ...(param?.needAuth &&
           token && {
             Authorization: `Bearer ${token}`,
           }),
