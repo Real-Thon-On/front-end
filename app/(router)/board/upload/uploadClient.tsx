@@ -144,14 +144,16 @@ export default function UploadClient({ action }: Props) {
         />
       </div>
       <div className="fixed flex justify-center inset-x-0 bottom-[3.2rem]">
-        <ButtonBox
-          onClick={() => setOpen(true)}
-          bgColor="var(--primary)"
-          className="max-w-[43.6rem]"
-          wFull
-        >
-          기록하기
-        </ButtonBox>
+        <div className="flex w-full justify-end max-w-[50rem] px-[3.2rem]">
+          <ButtonBox
+            onClick={() => setOpen(true)}
+            bgColor="var(--primary)"
+            className="max-w-[43.6rem]"
+            wFull
+          >
+            기록하기
+          </ButtonBox>
+        </div>
       </div>
       {open && (
         <Modal

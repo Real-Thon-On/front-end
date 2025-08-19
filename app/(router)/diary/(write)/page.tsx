@@ -6,7 +6,7 @@ import { UploadDiary } from '@/service/diary';
 import DiaryClient from './diaryClient';
 
 export default function Diary() {
-  async function signup(formData: FormData) {
+  async function uploadDiary(formData: FormData) {
     'use server';
 
     const contents = formData.get('diary')?.toString().trim() ?? null;
@@ -25,5 +25,5 @@ export default function Diary() {
       redirect('/diary/?error=upload_failed');
     }
   }
-  return <DiaryClient action={signup} />;
+  return <DiaryClient action={uploadDiary} />;
 }

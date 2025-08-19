@@ -51,7 +51,10 @@ export default function SocialLoginBtn({
 
   return (
     <Link href={redirectUrl}>
-      <ButtonBox bgColor={bgColor}>
+      <ButtonBox
+        bgColor={bgColor}
+        className="max-w-[32.6rem]"
+      >
         <div className="flex justify-center items-center gap-[1.2rem]">
           {icon}
           <span

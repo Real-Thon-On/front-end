@@ -1,4 +1,13 @@
-import { GetAccessToken, GetBoardPosts, RegisterUser, UploadDiary, UploadPost } from './interfaces';
+import {
+  GetAccessToken,
+  GetBoardPosts,
+  GetMindTestList,
+  GetMindTestQuestionList,
+  RegisterUser,
+  SubmitMindTest,
+  UploadDiary,
+  UploadPost,
+} from './interfaces';
 
 export interface APIResource {
   getAccessToken: GetAccessToken;
@@ -6,4 +15,7 @@ export interface APIResource {
   uploadDiary: UploadDiary;
   getBoardPosts: GetBoardPosts;
   uploadPost: UploadPost;
+  getMindTestList: GetMindTestList;
+  getMindTestQuestionList: GetMindTestQuestionList;
+  submitMindTest: SubmitMindTest;
 }

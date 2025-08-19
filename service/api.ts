@@ -11,7 +11,7 @@ export const api = async <T extends keyof APIResource>(
   headers?: APIHeader,
   needAuth?: boolean
 ): Promise<APIResource[T]['res']> => {
-  const token = await getCookie('accessToken');
+  const token = await getCookie('access_token');
 
   const makeRequest = async (): Promise<Response> => {
     return await fetch(`${process.env.BACKEND_API}${endpoint}`, {

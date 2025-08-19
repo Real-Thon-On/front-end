@@ -92,7 +92,7 @@ export default function Community() {
         )) || <div className="body1">게시글이 없습니다.</div>}
       </div>
       <div className="fixed flex justify-center inset-x-0 bottom-[3.2rem]">
-        <div className="flex w-full justify-end max-w-[43.6rem] h-[6rem] gap-[1.6rem]">
+        <div className="flex w-full justify-end max-w-[50rem] px-[3.2rem] h-[6rem] gap-[1.6rem]">
           <ButtonBox
             className="!w-[11.2rem] h-[6rem]"
             bgColor="var(--primary)"

@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import ButtonBox from '@/components/button/buttonBox';
 import Modal from '@/components/layout/modal/modal';
-import styles from '@styles/completeInput.module.css';
+import styles from '@styles/inputRadio.module.css';
 
 type Props = { action: (formData: FormData) => Promise<void> };
 
@@ -77,14 +77,16 @@ export default function SignupClient({ action }: Props) {
         </fieldset>
       </div>
       <div className="fixed flex justify-center inset-x-0 bottom-[3.2rem]">
-        <ButtonBox
-          onClick={() => setOpen(true)}
-          bgColor="var(--primary)"
-          className="max-w-[43.6rem]"
-          wFull
-        >
-          가입하기
-        </ButtonBox>
+        <div className="flex w-full justify-end max-w-[50rem] px-[3.2rem]">
+          <ButtonBox
+            onClick={() => setOpen(true)}
+            bgColor="var(--primary)"
+            className="max-w-[43.6rem]"
+            wFull
+          >
+            가입하기
+          </ButtonBox>
+        </div>
       </div>
       {open && (
         <Modal

@@ -54,7 +54,7 @@ export const RegisterUser = async (param: RegisterUserParams) => {
 
     const res = await api<'registerUser'>(
       'POST',
-      '/api/auth/complete-sign-up',
+      '/api/user/complete-sign-up',
       {
         nickname: param.nickname,
         email: param.email,
@@ -67,7 +67,7 @@ export const RegisterUser = async (param: RegisterUserParams) => {
       }
     );
 
-    return res.success;
+    return res;
   } catch (error) {
     const err = error as APIErrorResponse;
     console.error('RegisterUser Error: ', err);

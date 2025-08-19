@@ -8,6 +8,8 @@ export type TermsState = Record<string, boolean>;
 export type TagType = '넋두리' | '잡담' | '치유';
 export type TagTypeEN = 'NEOKDURI' | 'JABDAM' | 'CHIYU';
 
+export type MindTestType = 'ADULT' | 'STUDENT';
+
 const TAG_MAP_KO2EN = {
   NEOKDURI: '넋두리',
   JABDAM: '잡담',

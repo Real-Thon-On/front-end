@@ -14,6 +14,8 @@ export async function GET(req: NextRequest) {
   }
   // 분기점
 
+  console.log('id:', id, 'access:', access);
+
   try {
     await GetAccessToken({ id, access });
     await deleteCookie('tempToken');

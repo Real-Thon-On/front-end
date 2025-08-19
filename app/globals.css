@@ -129,7 +129,7 @@ video {
   @apply font-semibold text-[1.6rem] leading-[2rem] tracking-[0em];
 }
 @utility caption {
-  @apply font-medium text-[1.4rem] leading-[2rem] tracking-[-0.025em];
+  @apply font-medium text-[1.4rem] leading-[1.8rem] tracking-[-0.025em];
 }
 
 h1 {
@@ -188,6 +188,11 @@ button {
 }
 input:focus {
   outline: none;
+}
+input[type='radio'] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 textarea {
   resize: none;

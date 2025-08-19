@@ -12,7 +12,7 @@ export interface GetAccessToken {
 
 export interface RegisterUser {
   method: 'POST';
-  endpoint: '/api/auth/complete-sign-up';
+  endpoint: '/api/user/complete-sign-up';
   req: {
     nickname: string;
     email: string;

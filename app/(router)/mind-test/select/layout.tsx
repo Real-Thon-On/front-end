@@ -9,8 +9,7 @@ export default function DiaryLayout({ children }: { children: React.ReactNode })
           icon: <Left />,
           ariaLabel: '뒤로 가기',
         }}
-        title="분석결과"
-        border={true}
+        title="심리검사"
       />
       <main className="px-[3.2rem] mt-[2.4rem]">{children}</main>
     </>

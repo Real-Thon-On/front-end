@@ -35,7 +35,7 @@ export default function Home() {
 
         <Wrapper title="심리검사">
           <div className="grid grid-cols-2 gap-[1.2rem]">
-            <Link href={'/mind-test'}>
+            <Link href={'/mind-test/select'}>
               <Default className="justify-center items-center py-[2.6rem]">
                 <h3>지금 검사하기</h3>
               </Default>

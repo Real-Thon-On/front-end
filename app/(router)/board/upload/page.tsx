@@ -7,7 +7,7 @@ import { UploadBoardPost } from '@/service/board';
 import UploadClient from './uploadClient';
 
 export default function Diary() {
-  async function signup(formData: FormData) {
+  async function uploadPost(formData: FormData) {
     'use server';
 
     const title = formData.get('title')?.toString().trim() ?? null;
@@ -37,5 +37,5 @@ export default function Diary() {
       redirect('/board/posts');
     }
   }
-  return <UploadClient action={signup} />;
+  return <UploadClient action={uploadPost} />;
 }
