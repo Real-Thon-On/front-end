@@ -10,15 +10,15 @@ const defaultUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? `https://${process.env.NEXT_PUBLIC_SITE_URL}`
   : 'http://localhost:3000';
 
-export const metadata: Metadata = {
+export const metadata = {
   metadataBase: new URL(defaultUrl),
   manifest: '/manifest.webmanifest',
   applicationName: 'ON',
   title: { default: 'Save Your Minds - ON', template: '%s - ON' },
   description: '따뜻함을 켜다 - ON | Turn on the warmth - ON',
   icons: {
-    icon: [{ url: '/pwa/splash-image/favicon-196.png', sizes: '196x196', type: 'image/png' }],
-    apple: [{ url: '/pwa/splash-image/apple-icon-180.png' }],
+    icon: [{ url: '/pwa/splash/favicon-196.png', sizes: '196x196', type: 'image/png' }],
+    apple: [{ url: '/pwa/splash/apple-icon-180.png' }],
   },
   appleWebApp: {
     capable: true,
@@ -215,6 +215,12 @@ export default function RootLayout({
       lang="en"
       className="scrollbar-hidden"
     >
+      <head>
+        <meta
+          name="apple-mobile-web-app-capable"
+          content="yes"
+        />
+      </head>
       <body
         className={clsx(
           pretendard.variable,
