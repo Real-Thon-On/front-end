@@ -62,7 +62,7 @@ export default function Header({
 
         {/* Right */}
         <div className="justify-self-end min-w-0">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-[1.2rem]">
             {(right ?? []).slice(0, 2).map((a, i) => (
               <ActionButton
                 key={i}
