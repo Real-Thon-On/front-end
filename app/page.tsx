@@ -4,7 +4,7 @@ import { Default } from '@/components/layout/container/container';
 import { marketItems } from '@/constants';
 import CustomRight from '@icons/arrow/arrow2_right_custom.svg';
 import Banner from '@icons/banner.svg';
-import Chat from '@icons/chat.svg';
+import Board from '@icons/board.svg';
 import Diary from '@icons/diary.svg';
 import Symbol from '@icons/symbol_header.svg';
 
@@ -29,8 +29,8 @@ export default function Home() {
           title="커뮤니티"
           content="우리 동네 근처 사람들은?"
           description="커뮤니티 구경하기"
-          href="/community"
-          SVG={Chat}
+          href="/board/posts"
+          SVG={Board}
         />
 
         <Wrapper title="심리검사">

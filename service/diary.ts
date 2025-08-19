@@ -17,12 +17,12 @@ export const UploadDiary = async (param: { contents: string; hashtag: string[] }
       {
         todayDate: DATE,
         userDiaryText: `${param.contents} #${param.hashtag.join(' #')}`,
-        needAuth: true,
       },
       {
         'User-Agent': 'Mozilla/5.0',
         'Content-Type': 'application/json',
-      }
+      },
+      true
     );
 
     return res;

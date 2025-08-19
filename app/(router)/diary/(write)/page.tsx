@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { UploadDiary } from '@/service/diary';
 
-import DiaryClient from '../diaryClient';
+import DiaryClient from './diaryClient';
 
 export default function Diary() {
   async function signup(formData: FormData) {

@@ -200,3 +200,8 @@ textarea:focus {
   outline: none;
   border: 1px solid var(--black);
 }
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

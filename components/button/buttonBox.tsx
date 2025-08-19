@@ -28,7 +28,7 @@ export default function ButtonBox({
       type={type}
       form={formId}
       className={clsx(
-        wFull ? 'w-full' : 'w-[32.6rem]',
+        wFull ? 'w-full' : 'w-[43.6rem]',
         'h-[6rem] rounded-[1.6rem]',
         disabled && 'grayscale-90',
         className

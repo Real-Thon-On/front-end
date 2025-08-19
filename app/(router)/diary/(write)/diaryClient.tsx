@@ -83,6 +83,7 @@ export default function DiaryClient({ action }: Props) {
               placeholder="해시태그를 입력해주세요"
               onKeyDown={handleKeyDown}
               onBlur={handleBlur}
+              autoFocus
             />
           ) : (
             <button onClick={handleHashTagPlus}>
