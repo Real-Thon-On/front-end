@@ -5,8 +5,11 @@ export interface GetAccessToken {
   endpoint: '/api/auth/oauth-login';
   req: undefined;
   res: {
-    access: string;
-    refresh: string;
+    success: boolean;
+    data: {
+      access: string;
+      refresh: string;
+    };
   };
 }
 

@@ -22,14 +22,16 @@ export const GetAccessToken = async (param: AccInterlockCode) => {
       'Device-Id': param.id,
     });
 
-    await setCookie('access_token', res.access, {
+    const result = res.data;
+
+    await setCookie('access_token', result.access, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
       maxAge: 60 * 60 * 24,
     });
-    await setCookie('refresh_token', res.refresh, {
+    await setCookie('refresh_token', result.refresh, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
