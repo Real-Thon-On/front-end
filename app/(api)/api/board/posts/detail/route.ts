@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
     const postInfo = await GetBoardPostDetail(postId);
     const comments = await GetBoardComments(postId);
 
-    const parsedInfo = postInfo as BoardPostDetail;
     return NextResponse.json({
       success: true,
       data: {
