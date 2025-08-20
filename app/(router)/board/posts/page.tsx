@@ -5,72 +5,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import ButtonBox from '@/components/button/buttonBox';
-import { type TagType, type TagTypeEN, toEnTag, toKoTag } from '@/constants/types';
+import { type TagType, type TagTypeEN, dummyPosts, toEnTag, toKoTag } from '@/constants/types';
 import { BoardPostInfo } from '@/service/interfaces';
 import Down from '@icons/arrow/down.svg';
 import Pen from '@icons/pen.svg';
 
 import Post from '../_components/post';
 import Tag from '../_components/tag';
-
-export const dummyPosts: BoardPostInfo[] = [
-  {
-    boardId: 1,
-    title: '힘드네요',
-    content: '과제가 너무 많아요',
-    userId: 101,
-    userName: '박선영',
-    boardType: 'NEOKDURI',
-    hashtags: ['20대', '대학생'],
-    createdAt: '2025-08-18T10:30:00',
-    modifiedAt: '2025-08-19T12:00:00',
-  },
-  {
-    boardId: 2,
-    title: '리얼톤 대회',
-    content: '너무 기대가 됩니다',
-    userId: 102,
-    userName: '서정호',
-    boardType: 'JABDAM',
-    hashtags: ['자기계발', '해커톤'],
-    createdAt: '2025-08-17T09:15:00',
-    modifiedAt: '2025-08-18T14:00:00',
-  },
-  {
-    boardId: 3,
-    title: '하 인생',
-    content: '살기 싫어요',
-    userId: 103,
-    userName: '김성원',
-    boardType: 'CHIYU',
-    hashtags: ['공감', '우울'],
-    createdAt: '2025-08-19T08:00:00',
-    modifiedAt: '2025-08-20T11:00:00',
-  },
-  {
-    boardId: 4,
-    title: '야호 신난다',
-    content: '모두 행복하세요~',
-    userId: 104,
-    userName: '박민수',
-
-    boardType: 'JABDAM',
-    hashtags: ['신나', '행복'],
-    createdAt: '2025-08-16T13:45:00',
-    modifiedAt: '2025-08-17T15:20:00',
-  },
-  {
-    boardId: 5,
-    title: '사랑',
-    content: '좋아하는 사람이 생겼어요! 이런 게 사랑일까요?',
-    userId: 105,
-    userName: '최지우',
-    boardType: 'NEOKDURI',
-    hashtags: ['연애', '설렘', '짝사랑'],
-    createdAt: '2025-08-15T11:00:00',
-    modifiedAt: '2025-08-16T12:30:00',
-  },
-];
 
 export default function Community() {
   const router = useRouter();

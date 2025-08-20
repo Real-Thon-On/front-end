@@ -5,13 +5,13 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Default } from '@/components/layout/container/container';
+import { dummyPosts } from '@/constants/types';
 import { BoardPostInfo } from '@/service/interfaces/board';
 import Chat from '@icons/chat.svg';
 import CommentUpload from '@icons/comment_upload.svg';
 import NotHeart from '@icons/not_heart.svg';
 
 import Tag from '../../_components/tag';
-import { dummyPosts } from '../../posts/page';
 
 type Props = (formData: FormData) => Promise<void>;
 
