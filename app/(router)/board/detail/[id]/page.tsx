@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { UploadBoardComment } from '@/service/board';
 
 import CommentClient from './commentClient';
-import { dummyPosts } from '../../posts/page';
 
 export default function Comment() {
   async function uploadComment(formData: FormData) {
