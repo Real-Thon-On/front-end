@@ -17,20 +17,20 @@ export default async function TestResult() {
     return res.data;
   };
 
-  const infoData = await fetchData();
-  const { userName, testName, totalScore, resultState, resultMessage } = infoData[0];
-
-  // {
-  //   "success": "true",
-  //   "data": {
-  //       "id": 1,
-  //       "userName": null,
-  //       "testName": "우울",
-  //       "totalScore": 9,
-  //       "resultState": "경도",
-  //       "resultMessage": "가벼운 우울 증상을 보이고 있습니다. 스트레스 관리와 생활습관 개선이 필요할 수 있습니다."
-  //   }
-  // }
+  // const infoData = await fetchData();
+  const asdf = {
+    success: 'true',
+    data: {
+      id: 1,
+      userName: null,
+      testName: '우울',
+      totalScore: 9,
+      resultState: '경도',
+      resultMessage:
+        '가벼운 우울 증상을 보이고 있습니다. 스트레스 관리와 생활습관 개선이 필요할 수 있습니다.',
+    },
+  };
+  const { userName, testName, totalScore, resultState, resultMessage } = asdf.data;
 
   return (
     <>
