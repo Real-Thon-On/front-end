@@ -42,7 +42,7 @@ export default function TextPage() {
 
     const res = await SubmitMindTest(id, answers);
     if (!res.success) {
-      redirect(`/mind-test/test/${id}?error=upload_failed`);
+      redirect(`/mind-test/test/${id}/result?error=upload_failed`);
     }
     redirect(`/mind-test/test/${id}/result`);
   }
