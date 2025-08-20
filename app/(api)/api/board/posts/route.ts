@@ -17,10 +17,7 @@ export async function GET(req: NextRequest) {
   try {
     const res = await GetBoardPosts(param);
 
-    return NextResponse.json({
-      success: res.success,
-      data: res.data || [],
-    });
+    return NextResponse.json(res);
   } catch (error) {
     const err = error as APIErrorResponse;
 

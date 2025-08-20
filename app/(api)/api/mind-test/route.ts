@@ -17,12 +17,7 @@ export async function GET(req: NextRequest) {
   try {
     const res = await GetMindTestList(param);
 
-    return NextResponse.json(
-      { data: res },
-      {
-        status: 200,
-      }
-    );
+    return NextResponse.json(res);
   } catch (error) {
     const err = error as APIErrorResponse;
 

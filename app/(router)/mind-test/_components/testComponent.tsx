@@ -16,7 +16,7 @@ export default function TestComponent({ params }: { params: MindTestResponseDate
   } = params;
 
   return (
-    <Link href={`/mind-test/test/${id}`}>
+    <Link href={`/mind-test/test/${id}-${name}`}>
       <Default className="flex-col p-[2rem] pb-[1.6rem]">
         <h3>{name} 검사</h3>
         <div className="body3 mt-[.8rem]">{scoringMethod}</div>

@@ -90,3 +90,30 @@ export const SubmitMindTest = async (
     }
   }
 };
+
+export const GetTestResultData = async () => {
+  try {
+    const res = await api<'getTestResultData'>(
+      'GET',
+      `/api/psych-tests/result/me`,
+      undefined,
+      {
+        'User-Agent': 'Mozilla/5.0',
+        'Content-Type': 'application/json',
+      },
+      true
+    );
+
+    return res;
+  } catch (error) {
+    const err = error as APIErrorResponse;
+    console.error('GetTestResultData Error: ', err);
+    if (err.code === 'C001') {
+      deleteCookie('accessToken');
+      redirect('/signin');
+    } else {
+      console.error(`GetTestResultData Error: ${err.msg} [${err.code}]`);
+      redirect(`/signin?error=${err.msg}`);
+    }
+  }
+};

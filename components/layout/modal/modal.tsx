@@ -30,7 +30,7 @@ export default function Modal({
         className="absolute bg-[#DDE7E780] w-full h-full z-[101]"
         onClick={onCancel}
       />
-      <Default className={styles.modal}>
+      <Default className={clsx(styles.modal, 'flex-col')}>
         {pending ? (
           <div className="w-full h-full flex flex-col justify-center items-center gap-[1.2rem]">
             <div className="body1">{loadingText}</div>

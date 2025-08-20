@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import ButtonBox from '@/components/button/buttonBox';
@@ -16,10 +16,11 @@ type Props = (formData: FormData) => Promise<void>;
 export default function TestClient({ action }: { action: Props }) {
   const router = useRouter();
   const params = useParams();
+  const pathname = usePathname();
   const id = params.id;
-  const name = params.name;
 
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState<string | null>(null);
   const [questionList, setQuestionList] = useState<MindTestQuestion[]>([]);
 
   useEffect(() => {
@@ -28,13 +29,13 @@ export default function TestClient({ action }: { action: Props }) {
       router.push('/mind-test/select');
     }
 
+    setName(decodeURI(pathname.split('-')[2]));
+
     const fetchMindTestList = async () => {
       try {
         const response = await fetch(`/api/mind-test/q?id=${id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch mind test list');
-        }
         const data = await response.json();
+        console.log('Fetched mind test list:', data);
         const mindTestList: MindTestQuestion[] = data.data;
 
         setQuestionList(mindTestList);
@@ -46,7 +47,7 @@ export default function TestClient({ action }: { action: Props }) {
       }
     };
     fetchMindTestList();
-  }, [id, router]);
+  }, [id, router, pathname]);
 
   return (
     <>

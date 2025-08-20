@@ -23,9 +23,6 @@ export default function MindTest() {
     const fetchMindTestList = async () => {
       try {
         const response = await fetch(`/api/mind-test?type=${type}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch mind test list');
-        }
         const data = await response.json();
         const mindTestList: MindTestResponseDate[] = data.data;
 

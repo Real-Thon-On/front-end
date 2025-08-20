@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import ButtonBox from '@/components/button/buttonBox';
 import { Default } from '@/components/layout/container/container';
-import { RecommendedEvent } from '@/service/interfaces';
+import { GetAnalyzeDiary } from '@/service/diary';
+import { AnalyzedDiary, RecommendedEvent } from '@/service/interfaces';
 import ExampleImage from '@icons/exampleImage.svg';
 
 import ThumbComponent from '../_components/thumbComponent';
@@ -35,7 +37,37 @@ const exampleEvents: RecommendedEvent[] = [
   },
 ];
 
-export default function DiaryResult() {
+export default async function DiaryResult() {
+  const fetchData = async (): Promise<AnalyzedDiary> => {
+    const res = await GetAnalyzeDiary();
+
+    if (!res.success) {
+      console.error('Failed to fetch test result data');
+      redirect('/mind-test/select?error=result_fetch_failed');
+    }
+    return res.data;
+  };
+
+  const infoData = await fetchData();
+  const { analysis, suggestions, replyText, recommendedEvents } = infoData;
+
+  function cleanReplyText(input: string): string {
+    return (
+      input
+        // 코드펜스/백틱 제거
+        .replace(/```/g, '') // ``` 세 개
+        .replace(/`/g, '') // 나머지 단일 백틱
+        // 이스케이프된 제어문자 → 공백
+        .replace(/\\n|\\r|\\t/g, ' ')
+        // 실제 제어문자 → 공백
+        .replace(/[\r\n\t]+/g, ' ')
+        // 다중 공백 정리
+        .replace(/\s{2,}/g, ' ')
+        .trim()
+    );
+  }
+  const parsedReplyText = cleanReplyText(replyText);
+
   return (
     <>
       <div className="flex mb-[.4rem] items-center">
@@ -44,15 +76,11 @@ export default function DiaryResult() {
       </div>
       <HelpComment
         title="이런 점이 좋았어요"
-        content="오늘의 일기에서 느낀 감정과 생각을 솔직하게 표현해주셔서 감사합니다. 온심이는 당신의 감정을 이해하고, 더 나은 하루를 위해 도와줄 거예요."
-      />
-      <HelpComment
-        title="이런 점은 아쉬웠어요"
-        content="오늘의 일기에서 감정이나 생각을 더 자세히 표현해주시면, 온심이가 더 정확하게 분석하고 도와줄 수 있어요."
+        content={suggestions.good}
       />
       <HelpComment
         title="이런 점은 같이 개선해보아요"
-        content="온심이는 당신의 감정을 이해하고, 더 나은 하루를 위해 도와줄 거예요. 오늘의 일기를 통해 당신의 감정을 더 잘 이해하고, 함께 성장해나가요."
+        content={suggestions.feedback}
       />
       <div className="mt-[6rem]">
         <div className="flex mb-[1.6rem] items-center">
@@ -62,22 +90,16 @@ export default function DiaryResult() {
         {exampleEvents.length === 0 ? (
           <div className="body1">추천할 프로그램이 없어요.</div>
         ) : (
-          <RecommendedEvents events={exampleEvents} />
+          <RecommendedEvents events={recommendedEvents} />
         )}
       </div>
       <Default className="flex-col my-[6rem] px-[1.3rem] py-[2rem]">
         <div className="text-center">
           <h3>종합 의견</h3>
-          <div className="body1 text-center mt-[1.6rem]">
-            다른 이들의 말에 대해서 너무 깊게 생각하지 말아요!
-          </div>
+          <div className="body1 text-center mt-[1.6rem]">{suggestions.total_summary}</div>
         </div>
         <div className="my-[2rem] border-b border-[var(--gray2)]" />
-        <div className="body3 text-center break-keep">
-          다른 사람들의 말에 마음이 왜 그토록 무겁게 느껴지는지 생각해보셨나요? 자신을 이해하고
-          받아들이는 것도 중요해요. 작은 말 한마디에도 상처받는 것은 깊이 있는 사람이기 때문일
-          거예요. 내일은 오늘보다 조금 더 자신을 이해하고 사랑하는 하루가 되길 바랄게요.
-        </div>
+        <div className="body3 text-center break-keep">{parsedReplyText}</div>
         <div className="mt-[2rem] caption text-center">
           <span className="text-[var(--gray2)]">이 답장이 마음에 드셨나요?</span>
           <ThumbComponent />
@@ -126,7 +148,8 @@ const RecommendedEvents = ({ events }: { events: RecommendedEvent[] }) => {
         >
           <Link
             href={event.url}
-            className="block"
+            className="flex flex-col items-center"
+            target="_blank"
           >
             {/* <Image
               width={300}
@@ -137,6 +160,9 @@ const RecommendedEvents = ({ events }: { events: RecommendedEvent[] }) => {
             /> */}
             <ExampleImage />
             <div className="mt-[.8rem] body1 text-center">{event.mainCategory}</div>
+            <div className="caption mt-[.4rem] text-[var(--gray2)] text-center w-[12rem] break-keep">
+              {event.title}
+            </div>
           </Link>
         </div>
       ))}

@@ -1,29 +1,53 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import ButtonBox from '@/components/button/buttonBox';
 import { Default } from '@/components/layout/container/container';
+import { MindTestResult } from '@/service/interfaces';
+import { GetTestResultData } from '@/service/mindTest';
 
-export default function TestResult() {
+export default async function TestResult() {
+  const fetchData = async (): Promise<MindTestResult[]> => {
+    const res = await GetTestResultData();
+
+    if (!res.success) {
+      console.error('Failed to fetch test result data');
+      redirect('/mind-test/select?error=result_fetch_failed');
+    }
+    return res.data;
+  };
+
+  const infoData = await fetchData();
+  const { userName, testName, totalScore, resultState, resultMessage } = infoData[0];
+
+  // {
+  //   "success": "true",
+  //   "data": {
+  //       "id": 1,
+  //       "userName": null,
+  //       "testName": "우울",
+  //       "totalScore": 9,
+  //       "resultState": "경도",
+  //       "resultMessage": "가벼운 우울 증상을 보이고 있습니다. 스트레스 관리와 생활습관 개선이 필요할 수 있습니다."
+  //   }
+  // }
+
   return (
     <>
       <div className="flex items-end">
-        <h3>온심이</h3>
+        <h3>{userName ? userName : '온심이'}</h3>
         <span className="body1 ml-[.4rem]">님의 분석 결과예요.</span>
       </div>
       <Default className="flex-col px-[1.3rem] py-[2.4rem] mt-[4rem]">
         <div>
-          <h2 className="text-center">심한수준</h2>
+          <h2 className="text-center">{resultState}</h2>
           <div className="text-center mt-[1rem]">
-            <span className="body1">외상 후 스트레스 장애 검진 결과</span>
-            <h3 className="!text-[2.4rem] text-[var(--primary)] mt-[.4rem]">{4}점</h3>
+            <span className="body1">{testName} 검진 결과</span>
+            <h3 className="!text-[2.4rem] text-[var(--primary)] mt-[.4rem]">{totalScore}점</h3>
           </div>
         </div>
         <div className="border-b border-[var(--gray2)] my-[2.5rem]"></div>
-        <div className="text-center break-keep body3">
-          외상 사건과 관련된 반응으로 심한 불편감을 호소하고 있습니다. 평소보다 일상생활에
-          적응하는데 어려움을 느낄 수 있습니다. 추가적인 평가나 정신건강 전문가의 도움을 받아
-          보시기를 권해드립니다.
-        </div>
+        <div className="text-center break-keep body3">{resultMessage}</div>
       </Default>
 
       <div className="fixed flex justify-center inset-x-0 bottom-[3.2rem]">

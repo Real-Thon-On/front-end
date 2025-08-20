@@ -10,20 +10,24 @@ export default function TextPage() {
     const choiceCount = formData.get('choiceCount');
     const testId = formData.get('testId');
 
-    if (!choiceCount || isNaN(Number(choiceCount))) {
-      console.error('Invalid choice count:', choiceCount);
+    if (!choiceCount || !testId) {
+      console.error('choiceCount or testId is missing');
       redirect('/mind-test/select');
     }
-    if (!testId || isNaN(Number(testId))) {
-      console.error('Invalid test ID:', testId);
-      redirect('/mind-test/select');
-    }
+
+    const parsedChoiceCount = typeof choiceCount === 'string' ? decodeURI(choiceCount) : '';
+    const parsedTestId = typeof testId === 'string' ? decodeURI(testId) : '';
+
+    console.log('choiceCount:', parsedChoiceCount, 'testId:', parsedTestId.split('-')[0]);
 
     const id = Number(testId);
 
     const answers = [];
     for (let i = 1; i <= Number(choiceCount); i++) {
       const choiceId = formData.get(`question-${i}`);
+
+      console.log(`question-${i} choiceId:`, choiceId);
+
       if (!choiceId || isNaN(Number(choiceId))) {
         console.error(`Invalid choice ID for question ${i}:`, choiceId);
         redirect('/mind-test/select');
@@ -33,6 +37,8 @@ export default function TextPage() {
         choiceId: Number(choiceId),
       });
     }
+
+    console.log('Submitting answers:', answers);
 
     const res = await SubmitMindTest(id, answers);
     if (!res.success) {

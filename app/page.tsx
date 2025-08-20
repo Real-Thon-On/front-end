@@ -40,7 +40,7 @@ export default function Home() {
                 <h3>지금 검사하기</h3>
               </Default>
             </Link>
-            <Link href={'/mind-test/result'}>
+            <Link href={'/mind-test/test/1/result'}>
               <Default className="justify-center items-center py-[2.6rem]">
                 <h3>검사결과 확인</h3>
               </Default>

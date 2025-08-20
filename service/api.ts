@@ -39,5 +39,5 @@ export const api = async <T extends keyof APIResource>(
   }
 
   const result = (await res.json()) as APIResponse<APIResource[T]['res']>;
-  return result.data;
+  return result;
 };

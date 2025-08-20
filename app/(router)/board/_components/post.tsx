@@ -7,13 +7,11 @@ import Tag from './tag';
 
 interface PostProps {
   img?: string;
-  nickname: string;
+  nickname: string | null;
   tags: string[];
   content: string;
-  heart: number;
-  comment: number;
 }
-export default function Post({ img, nickname, tags, content, heart, comment }: PostProps) {
+export default function Post({ img, nickname, tags, content }: PostProps) {
   return (
     <div className="py-[2.4rem] border-t border-[var(--gray2)]">
       <div className="flex flex-col gap-[2.4rem]">
@@ -27,7 +25,7 @@ export default function Post({ img, nickname, tags, content, heart, comment }: P
           ) : (
             <div className="w-[4rem] aspect-square bg-gray-400 rounded-full"></div>
           )}
-          <h3>{nickname}</h3>
+          <h3>{nickname ? nickname : '온심이'}</h3>
         </div>
         <div className="flex gap-[.8rem]">
           {tags.map((tag, index) => (
@@ -46,11 +44,11 @@ export default function Post({ img, nickname, tags, content, heart, comment }: P
       <div className="flex justify-end gap-[.8rem] mt-[1.6rem]">
         <div className="flex gap-[.4rem]">
           <Heart />
-          <span>{heart}</span>
+          <span>{0}</span>
         </div>
         <div className="flex gap-[.4rem]">
           <Chat />
-          <span>{comment}</span>
+          <span>{0}</span>
         </div>
       </div>
     </div>

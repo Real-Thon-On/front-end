@@ -21,7 +21,7 @@ export default function SignupComplete() {
     }
 
     const res = await RegisterUser({ nickname, email });
-    if (res.success) redirect('/oauth/signup');
+    if (res) redirect('/oauth/signup');
   }
 
   return <SignupClient action={signup} />;

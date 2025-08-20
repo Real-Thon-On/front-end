@@ -37,3 +37,30 @@ export const UploadDiary = async (param: { contents: string; hashtag: string[] }
     }
   }
 };
+
+export const GetAnalyzeDiary = async () => {
+  try {
+    const res = await api<'getAnalyzeDiary'>(
+      'GET',
+      '/api/ai/diary/analyze/result',
+      undefined,
+      {
+        'User-Agent': 'Mozilla/5.0',
+        'Content-Type': 'application/json',
+      },
+      true
+    );
+
+    return res;
+  } catch (error) {
+    const err = error as APIErrorResponse;
+    console.error('GetAnalyzeDiary Error: ', err);
+    if (err.code === 'C001') {
+      deleteCookie('accessToken');
+      redirect('/signin');
+    } else {
+      console.error(`GetAnalyzeDiary Error: ${err.msg} [${err.code}]`);
+      redirect(`/signin?error=${err.msg}`);
+    }
+  }
+};

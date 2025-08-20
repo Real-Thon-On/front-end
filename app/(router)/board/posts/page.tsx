@@ -6,30 +6,19 @@ import { useEffect, useState } from 'react';
 
 import ButtonBox from '@/components/button/buttonBox';
 import { type TagType, type TagTypeEN, toEnTag, toKoTag } from '@/constants/types';
+import { BoardPostInfo } from '@/service/interfaces';
 import Down from '@icons/arrow/down.svg';
 import Pen from '@icons/pen.svg';
 
 import Post from '../_components/post';
 import Tag from '../_components/tag';
 
-interface ContentResType {
-  id: number;
-  img?: string;
-  nickname: string;
-  tags: string[];
-  content: string;
-  heart: number;
-  comment: number;
-}
-
 export default function Community() {
   const router = useRouter();
   const [tag, setTag] = useState<TagType>('넋두리');
-  const [contents, setContents] = useState<ContentResType[]>([]);
+  const [contents, setContents] = useState<BoardPostInfo[]>([]);
 
   const tags: TagTypeEN[] = ['NEOKDURI', 'JABDAM', 'CHIYU'];
-
-  const ContentTags = ['20대', '힘듬', '소통'];
 
   const handleTagClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedTag = e.currentTarget.name as TagType;
@@ -39,14 +28,17 @@ export default function Community() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`/api/board/posts/?tag=${toEnTag(tag)}`);
-      if (!res.ok) {
-        console.error('Failed to fetch posts');
+      const response = await res.json();
+      const result = response.data as BoardPostInfo[];
+
+      if (!result || result.length === 0) {
+        console.error('No posts found for the selected tag:', tag);
         return;
       }
-      const data = await res.json();
-      console.log('Fetched posts:', data);
 
-      setContents(data);
+      console.log('Fetched posts:', result);
+
+      setContents(result);
     };
 
     fetchData();
@@ -76,17 +68,14 @@ export default function Community() {
       <div className="border-b border-[var(--gray2)] mt-[2.8rem]">
         {contents.map((content, index) => (
           <Link
-            href={`/board/detail/${content.id}`}
+            href={`/board/detail/${content.boardId}`}
             key={index}
           >
             <Post
               key={index}
-              img={content.img}
-              nickname={content.nickname}
-              tags={content.tags}
+              nickname={content.userName}
+              tags={content.hashtags}
               content={content.content}
-              heart={content.heart}
-              comment={content.comment}
             />
           </Link>
         )) || <div className="body1">게시글이 없습니다.</div>}

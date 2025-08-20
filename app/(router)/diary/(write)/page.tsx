@@ -24,6 +24,7 @@ export default function Diary() {
     if (!res.success) {
       redirect('/diary/?error=upload_failed');
     }
+    redirect('/diary/result');
   }
   return <DiaryClient action={uploadDiary} />;
 }

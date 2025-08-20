@@ -1,34 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import type { APIErrorResponse, MindTestType } from '@/constants/types';
-import { GetMindTestQuestionList } from '@/service/mindTest';
+import type { APIErrorResponse, TagTypeEN } from '@/constants/types';
+import { GetBoardComments, GetBoardPostDetail } from '@/service/board';
+import { BoardPostDetail } from '@/service/interfaces';
 import { deleteCookie } from '@/utils/cookie';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get('id');
-  const name = searchParams.get('name');
 
   if (!id) {
     return NextResponse.json({ success: false, message: 'id is required' }, { status: 400 });
   }
 
-  console.log('id', id);
-
-  const parsedId = id.split('-')[0];
-  const parsedName = id.split('-')[1];
-
-  console.log('id', parsedId);
-  console.log('name', parsedName);
-
-  const idNumber = Number(parsedId);
-
-  console.log('idNumber', idNumber);
+  const postId = Number(id);
 
   try {
-    const res = await GetMindTestQuestionList(idNumber);
+    const postInfo = await GetBoardPostDetail(postId);
+    const comments = await GetBoardComments(postId);
 
-    return NextResponse.json(res);
+    const parsedInfo = postInfo as BoardPostDetail;
+    return NextResponse.json({
+      success: true,
+      data: {
+        postInfo: postInfo,
+        comments: comments,
+      },
+    });
   } catch (error) {
     const err = error as APIErrorResponse;
 
