@@ -5,27 +5,26 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Default } from '@/components/layout/container/container';
-import { BoardPostDetail } from '@/service/interfaces/board';
+import { BoardPostInfo } from '@/service/interfaces/board';
 import Chat from '@icons/chat.svg';
 import CommentUpload from '@icons/comment_upload.svg';
 import NotHeart from '@icons/not_heart.svg';
 
 import Tag from '../../_components/tag';
+import { dummyPosts } from '../../posts/page';
 
 type Props = (formData: FormData) => Promise<void>;
 
 export default function CommentClient({ action }: { action: Props }) {
   const params = useParams();
   const id = params.id;
-
-  const [postInfo, setPostInfo] = useState<BoardPostDetail>({
+  const [postInfo, setPostInfo] = useState<BoardPostInfo>({
     boardId: 0,
     title: '',
     content: '',
     userId: 0,
     userName: '',
-    profileImageUrl: null,
-    boardTypes: [],
+    boardType: 'NEOKDURI',
     hashtags: [],
     createdAt: '',
     modifiedAt: '',
@@ -38,9 +37,15 @@ export default function CommentClient({ action }: { action: Props }) {
     }
     const fetchPostDetails = async () => {
       const res = await fetch(`/api/boards/post/detail?id=${id}`);
+      for (let i = 0; i < dummyPosts.length; i++) {
+        if (dummyPosts[i].boardId === Number(id)) {
+          setPostInfo(dummyPosts[i]);
+          return;
+        }
+      }
 
-      const data = await res.json();
-      setPostInfo(data);
+      // const data = await res.json();
+      // setPostInfo(data);
     };
     fetchPostDetails();
   }, [id]);
@@ -55,21 +60,21 @@ export default function CommentClient({ action }: { action: Props }) {
   const CommentArray = [
     {
       id: 1,
-      nickname: '익명1',
+      nickname: '김도현',
       content: '힘내세요! 저도 그런 날이 많았어요.',
       heart: 2,
       comment: 1,
       subComments: [
         {
           id: 1,
-          nickname: '대댓글1',
+          nickname: '온심이',
           content: '감사합니다! 힘내볼게요.',
         },
       ],
     },
     {
       id: 2,
-      nickname: '익명2',
+      nickname: '이수진',
       content: '저도 비슷한 경험이 있어요. 같이 힘내요!',
     },
   ];

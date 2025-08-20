@@ -38,7 +38,6 @@ export interface BoardPostDetail {
   content: string;
   userId: number;
   userName: string;
-  profileImageUrl: string | null;
   boardTypes: TagTypeEN[];
   hashtags: string[];
   createdAt: string;

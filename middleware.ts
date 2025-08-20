@@ -50,8 +50,8 @@ export default function middleware(req: NextRequest) {
   }
 
   if (!isAuthed) {
-    // const loginUrl = new URL('/signin', req.url);
-    // return NextResponse.redirect(loginUrl);
+    const loginUrl = new URL('/signin', req.url);
+    return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();
